@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 const list = [
@@ -32,7 +31,7 @@ class App extends Component {
     this.onDismiss = this.onDismiss.bind(this);
   }
 
-  onDimiss(id)  {
+  onDismiss(id)  {
     const isNotId = item => item.objectID !== id;
     const updatedList = this.state.list.filter(isNotId);
     this.setState({ list: updatedList });
