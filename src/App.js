@@ -67,8 +67,7 @@ class App extends Component {
   }
 }
 
-function Search(props) {
-  const { value, onChange, children } = this.props;
+function Search({ value, onChange, children }) {
   return (
     <form>
       {children} <input
