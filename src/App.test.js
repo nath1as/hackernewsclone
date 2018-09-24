@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import App, { Search, Button, Table } from './App';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Search', () => {
 
@@ -20,7 +24,7 @@ describe('Search', () => {
   });
 
 });
- 
+
 describe('Button', () => {
 
   it('renders without crashing', () => {
@@ -40,7 +44,7 @@ describe('Button', () => {
 });
 
 describe('Table', () => {
-  
+
   const props = {
     list: [
       { title: '1', author: '1', num_comments: 1, points: 2, objectID: 'y' },
@@ -51,7 +55,6 @@ describe('Table', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Table { ...props } />, div);
-    ReactDOM.unmountComponentAtNode(div);
   });
 
   test('has a valid snapshot', () => {
@@ -61,6 +64,15 @@ describe('Table', () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('shows two items in list', () => {
+    const item = shallow(
+      <Table { ...props } />
+    );
+
+    expect(item.find('.table-row').length).toBe(2);
+  });
+
 });
 
 describe('App', () => {
@@ -79,3 +91,5 @@ describe('App', () => {
     expect(tree).toMatchSnapshot();
   });
 });
+
+
